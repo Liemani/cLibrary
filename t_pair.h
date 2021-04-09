@@ -5,9 +5,11 @@
 
 typedef struct		s_Pair
 {
+	void			(*freeSelf)(t_pair **pair);
+	void			(*descriptionSelf)(t_pair **pair);
 	void			(*freeKey)(void	**key);
-	void			(*freeValue)(void **value);
 	void			(*descriptionKey)(void *key);
+	void			(*freeValue)(void **value);
 	void			(*descriptionValue)(void *value);
 }					t_Pair
 

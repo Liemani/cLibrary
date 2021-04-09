@@ -3,21 +3,13 @@
 
 
 
-typedef struct		s_List
-{
-	void			(*freeContent)(void **content);
-	void			(*descriptionContent)(void *content);
-}					t_List
-
 typedef struct		s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list
 
-
-
-t_List	List;
+t_class	*List;
 
 void	newList(void (*freeContent)(void **),
 		void (*descriptionContent)(void *));

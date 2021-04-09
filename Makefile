@@ -1,12 +1,10 @@
 NAME		= libcLibrary.a
 
 SRCS		= \
-			  t_primitiveList.c \
-			  t_primitivePair.c \
-			  t_classTable.c \
-			  t_list.c \
-			  t_pair.c \
-			  t_dictionary.c
+			  utils.c \
+			  t_instanceList.c \
+			  t_class.c \
+			  t_classList.c \
 OBJS		= $(SRCS:.c=.o)
 
 CC			= clang

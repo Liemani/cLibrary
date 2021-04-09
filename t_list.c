@@ -10,6 +10,11 @@
 
 
 
+void	setListList()
+{
+	
+}
+
 void	newList(void (*freeContent)(void **),
 		void	(*descriptionContent)(void *))
 {
