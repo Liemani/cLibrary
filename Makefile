@@ -7,14 +7,14 @@ SRCS		= \
 			  t_class/t_primitiveList.c \
 			  t_class/t_class.c \
 			  t_class/t_null.c \
-			  t_list.c
+			  class/t_list.c
 OBJS		= $(SRCS:.c=.o)
 
 TESTSRCS	= program.c
 TESTOBJS	= $(TESTSRCS:.c=.o)
 
 CC			= clang
-INCLUDE		= -I t_class
+INCLUDE		= -I t_class -I class
 COMPILE		= $(CC) $(INCLUDE)
 
 
