@@ -1,54 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "t_pair.h"
-
-//
-//	stdio.h
-//		printf()
-//
-//	stdlib.h
-//		NULL, free()
+#include "class.h"
 
 
 
-void	setPair(void (*freeKey)(void **),
-		void (*freeValue)(void **),
-		void (*descriptionKey)(void *key),
-		void (*descriptionValue)(void *value))
-{
-	Pair->freeKey = freeKey;
-	Pair->freeValue = freeValue;
-	Pair->descriptionKey = descriptionKey;
-	Pair->descriptionValue = descriptionValue;
-}
-
-t_pair	*newPair(void *key, void *value)
+static t_pair	*_newPair()
 {
 	t_pair	*pair;
 
-	pair = malloc(sizeof(*pair));
-	if (pair == NULL)
-		return (NULL);
-
-	pair->key = key;
-	pair->value = value;
+	lmtAlloc(pair);
 	
+	classAddInstance(Pair, pair);
+
 	return (pair);
 }
 
-void	freePair(t_pair **pair)
+static void		_deallocPair(t_pair *pair)
 {
-	Pair->freeKey(&(*pair)->key);
-	Pair->freeValue(&(*pair)->value);
-	free(*pair);
-	*pair = NULL;
+	if (!pair)
+		return ;
+
+	classRemoveInstance(Pair, pair);
+
+	free(pair);
 }
 
-void	descriptionPair(t_pair *pair)
+static void		_descriptionPair(t_pair *pair)
 {
-	printf("(");
-	descriptionKey(pair->key);
-	printf(", ");
-	descriptionValue(pair->value);
-	printf(")");
+	if (!pair)
+	{
+		description(pair);
+		return ;
+	}
+
+	printf("t_pair: [ key: ");
+	description(pair->key);
+	printf(", value: ");
+	description(pair->value);
+	printf(" ]");
+
+}
+
+void			setPair()
+{
+	if (!Class || classContainsInstance(Class, Pair))
+		return ;
+
+	Pair = Class->new();
+	Pair->new = (newType)_newPair;
+	Pair->dealloc = (deallocType)_deallocPair;
+	Pair->description = (descriptionType)_descriptionPair;
 }

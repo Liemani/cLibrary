@@ -4,7 +4,23 @@
 
 
 
-int	program(int argc, char **argv)
+#define EXECUTE	test001();
+
+void	test001()
+{
+	t_list	*list = List->new();
+	t_pair	*pair = Pair->new();
+
+	pair->key = "hi";
+	pair->value = "there";
+
+	listAddElement(list, pair);
+
+	description(list);
+	putchar('\n');
+}
+
+void	test000()
 {
 	t_list	*list;
 
@@ -33,13 +49,14 @@ int	program(int argc, char **argv)
 	dealloc(List);
 
 	description(Class);
-	printf("\n\n");
+	printf("\n");
+}
 
-	printf("dealloc(Class); \n\n");
-	dealloc(Class);
 
-	description(Class);
-	printf("\n\n");
+
+int	program(int argc, char **argv)
+{
+	EXECUTE;
 
 	return (0);
 }

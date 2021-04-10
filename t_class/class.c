@@ -30,13 +30,17 @@ static void		__descriptionClass(void *class)
 static void		___deallocClass()
 {
 	t_primitiveList	*element;
+	t_primitiveList *next;
 
 	if (!Class)
 		return ;
 
-	element = Class->instanceList;
-	while ((element = element->next))
+	next = Class->instanceList->next;
+	while ((element = next))
+	{
+		next = element->next;
 		__deallocClass(element->content);
+	}
 	_deallocClass(Class);
 
 	Class = NULL;

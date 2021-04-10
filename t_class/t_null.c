@@ -12,9 +12,9 @@ void	_deallocNull(void *null)
 	return ;
 }
 
-void	_descriptionNull(void *null)
+void	_descriptionNull(void *instance)
 {
-	printf("NULL");
+	printf("%p", instance);
 }
 
 void		setNull()
