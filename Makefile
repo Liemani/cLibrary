@@ -1,13 +1,21 @@
 NAME		= libcLibrary.a
+TESTNAME	= program.out
 
 SRCS		= \
-			  utils.c \
-			  t_instanceList.c \
-			  t_class.c \
-			  t_classList.c \
+			  t_class/class.c \
+			  t_class/utils.c \
+			  t_class/primitiveList.c \
+			  t_class/t_class.c \
+			  t_class/t_null.c \
+			  t_list.c \
 OBJS		= $(SRCS:.c=.o)
 
+TESTSRCS	= program.c
+TESTOBJS	= $(TESTSRCS:.c=.o)
+
 CC			= clang
+INCLUDE		= -I t_class
+COMPILE		= $(CC) $(INCLUDE)
 
 
 
@@ -17,15 +25,18 @@ debug:		setdebug $(NAME)
 setdebug:
 			$(eval OPTION = -g)
 
+test.out:	setdebug $(TESTOBJS)
+			$(COMPILE) $(OPTION) -L. -lcLibrary -o $(TESTNAME) $(TESTOBJS)
+
 $(NAME):	$(OBJS)
 			ar -rc $@ $^
 
 %.o:		%.c
-			$(CC) $(OPTION) -o $@ -c $<
+			$(COMPILE) $(OPTION) -o $@ -c $<
 
 .PHONY:		clean fclean re
 clean:
-			rm -f $(OBJS)
+			rm -f $(OBJS) $(TESTOBJS)
 fclean:		clean
-			rm -f $(NAME)
+			rm -f $(NAME) $(TESTNAME)
 re:			fclean all

@@ -1,62 +1,78 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "t_list.h"
 
-//	stdio.h
-//		printf()
-//
-//	stdlib.h
-//		NULL, free()
+#include "cLibrary.h"
 
 
 
-void	setListList()
+static t_list	*_newList()
 {
-	
+	t_list	*list;
+
+	lmtAlloc(list);
+	list->next = NULL;
+
+	classAddInstance(List, list);
+
+	return (list);
 }
 
-void	newList(void (*freeContent)(void **),
-		void	(*descriptionContent)(void *))
+static void		_deallocList(t_list *list)
 {
-	List->freeContent = freeContent;
-	List->descriptionContent = descriptionContent;
-}
+	t_list	*element;
+	t_list	*next;
 
-int		addElement(t_list **list, void *content)
-{
-	t_list	*newElement;
+	if (!list)
+		return ;
 
-	newElement = malloc(sizeof(t_list));
-	if (newElement == NULL)
-		return (-1);
-	newElement->content = content;
-	newElement->next = *list;
-	*list = newElement;
-	return (0);
-}
+	classRemoveInstance(List, list);
 
-void	freeList(t_list **list)
-{
-	t_list	currentElement;
-	t_list	nextElement;
-
-	currentElement = *list;
-	while (currentElement)
+	next = list->next;
+	while ((element = next))
 	{
-		nextElement = currentElement->next;
-		List->freeContent(&currentElement->content);
-		free(currentElement);
-		currentElement = nextElement;
+		next = element->next;
+		free(element);
 	}
-	*list = NULL;
+	free(list);
 }
 
-void	descriptionList(t_list *list)
+static void		_descriptionList(t_list *list)
 {
-	while (list)
+	printf("t_list: [ ");
+	if ((list = list->next))
 	{
-		List->descriptionContent(list->content);
-		list = list->next;
-		printf(", ");
+		classDescription(list->content);
+		while ((list = list->next))
+		{
+			printf(", ");
+			classDescription(list->content);
+		}
 	}
+	else
+		classDescription(list);
+	printf(" ]");
+}
+
+void			setList()
+{
+	if (List)
+		return ;
+
+	List = Class->new();
+	List->new = _newList;
+	List->dealloc = _deallocList;
+	List->description = _descriptionList;
+}
+
+void			listAddElement(t_list *list, void *content)
+{
+	t_list	*element;
+
+	if (!list)
+		return ;
+
+	lmtAlloc(element);
+	element->content = content;
+	element->next = list->next;
+	list->next = element;
 }

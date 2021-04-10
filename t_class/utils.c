@@ -1,8 +1,10 @@
+#include <stdio.h>
+
 #include "utils.h"
 
 
 
-void	_lmtMalloc(void **argument, size_t size)
+void	_lmtAlloc(void **argument, size_t size)
 {
 	*argument = malloc(size);
 	if (*argument == NULL)
