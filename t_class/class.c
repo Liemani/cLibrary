@@ -27,15 +27,7 @@ static void		__descriptionClass(void *class)
 	_descriptionClass(class);
 }
 
-void			___setClass()
-{
-	Class = _newClass();
-	Class->new = (newType)__newClass;
-	Class->dealloc = __deallocClass;
-	Class->description = __descriptionClass;
-}
-
-void			___deallocClass()
+static void		___deallocClass()
 {
 	t_primitiveList	*element;
 
@@ -44,13 +36,13 @@ void			___deallocClass()
 
 	element = Class->instanceList;
 	while ((element = element->next))
-		Class->dealloc(element->content);
+		__deallocClass(element->content);
 	_deallocClass(Class);
 
 	Class = NULL;
 }
 
-void			___descriptionClass()
+static void		___descriptionClass()
 {
 	t_primitiveList	*element;
 
@@ -61,11 +53,11 @@ void			___descriptionClass()
 		printf("         classList: [ ");
 		if ((element = Class->instanceList->next))
 		{
-			Class->description(element->content);
+			__descriptionClass(element->content);
 			while ((element = element->next))
 			{
 				printf(", \n                      ");
-				Class->description(element->content);
+				__descriptionClass(element->content);
 			}
 		}
 		else
@@ -77,13 +69,31 @@ void			___descriptionClass()
 	printf(" ]");
 }
 
+void			setClass()
+{
+	Class = _newClass();
+	Class->new = (newType)__newClass;
+	Class->dealloc = __deallocClass;
+	Class->description = __descriptionClass;
+
+	kernelClass.dealloc = ___deallocClass;
+	kernelClass.description = ___descriptionClass;
+}
+
 t_class	*__classSubscriptInstance(void *instance)
 {
 	t_primitiveList	*element;
 
+	if (instance == Class)
+		return (&kernelClass);
+
 	element = Class->instanceList;
 	while ((element = element->next))
+	{
+		if (element->content == instance)
+			return (Class);
 		if (classContainsInstance(element->content, instance))
 			return (element->content);
+	}
 	return (Null);
 }

@@ -5,7 +5,7 @@ int	program(int argc, char **argv);
 
 int	main(int argc, char **argv)
 {
-	___setClass();
+	setClass();
 	setNull();
 	setList();
 

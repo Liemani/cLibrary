@@ -42,15 +42,15 @@ static void		_descriptionList(t_list *list)
 	printf("t_list: [ ");
 	if ((list = list->next))
 	{
-		classDescription(list->content);
+		description(list->content);
 		while ((list = list->next))
 		{
 			printf(", ");
-			classDescription(list->content);
+			description(list->content);
 		}
 	}
 	else
-		classDescription(list);
+		description(list);
 	printf(" ]");
 }
 

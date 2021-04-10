@@ -8,44 +8,38 @@ int	program(int argc, char **argv)
 {
 	t_list	*list;
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
-	printf("list = List->new(); \n");
+	printf("list = List->new(); \n\n");
 	list = List->new();
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
-	printf("classDealloc(list); \n");
-	classDealloc(list);
+	printf("dealloc(list); \n\n");
+	dealloc(list);
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
-	printf("Class->dealloc(Null); \n");
-	Class->dealloc(Null);
+	printf("dealloc(Null); \n\n");
+	dealloc(Null);
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
-	printf("Class->dealloc(List); \n");
-	Class->dealloc(List);
+	printf("dealloc(List); \n\n");
+	dealloc(List);
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
-	printf("___deallocClass(); \n");
-	___deallocClass();
+	printf("dealloc(Class); \n\n");
+	dealloc(Class);
 
-	___descriptionClass();
-	putchar('\n');
-	putchar('\n');
+	description(Class);
+	printf("\n\n");
 
 	return (0);
 }

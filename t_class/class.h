@@ -7,21 +7,20 @@
 
 
 
-#define classDealloc(argument) __classSubscriptInstance(argument)->dealloc(argument)
+#define dealloc(argument) __classSubscriptInstance(argument)->dealloc(argument)
 
-#define classDescription(argument) __classSubscriptInstance(argument)->description(argument)
+#define description(argument) __classSubscriptInstance(argument)->description(argument)
 
 
 
+t_class	kernelClass;
 t_class	*Class;
 
 
 
-void	___setClass();
+void	setClass();
 
 t_class	*__classSubscriptInstance(void *instance);
-void	___deallocClass();
-void	___descriptionClass();
 
 
 
