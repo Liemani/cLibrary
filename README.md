@@ -86,6 +86,8 @@ int program(int argc, char **argv)
 ```
 
 ```zsh
+% make test
+...
 % ./program.out
 Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
          classList: [ t_class: [ new: 0x100f7bb60, dealloc: 0x100f7b9d4, description: 0x100f7ba48, t_primitiveList: [ NULL ] ],
@@ -117,7 +119,7 @@ dealloc(Class);
 
 Class: [ NULL ]
 
-% fg
+%
 ```
 
 ## Details
