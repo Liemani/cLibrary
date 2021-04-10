@@ -7,9 +7,9 @@
 
 
 
-#define classDealloc(argument) __classListSubscriptInstance(argument)->dealloc(argument)
+#define classDealloc(argument) __classSubscriptInstance(argument)->dealloc(argument)
 
-#define classDescription(argument) __classListSubscriptInstance(argument)->description(argument)
+#define classDescription(argument) __classSubscriptInstance(argument)->description(argument)
 
 
 
@@ -17,9 +17,10 @@ t_class	*Class;
 
 
 
-void	setClass();
+void	___setClass();
 
 t_class	*__classSubscriptInstance(void *instance);
+void	___deallocClass();
 void	___descriptionClass();
 
 

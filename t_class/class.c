@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "class.h"
@@ -26,41 +27,63 @@ static void		__descriptionClass(void *class)
 	_descriptionClass(class);
 }
 
-void			setClass()
+void			___setClass()
 {
 	Class = _newClass();
-	Class->new = __newClass;
+	Class->new = (newType)__newClass;
 	Class->dealloc = __deallocClass;
 	Class->description = __descriptionClass;
 }
 
-t_class	*__classSubscriptInstance(void *instance)
+void			___deallocClass()
 {
-	class = Class->next;
-	while ((class = class->next))
-		if (classContainsInstance(class, instance))
-			return (class);
-	return (Null);
-}
-
-void			___descriptionClass()
-{
-	t_class	element;
+	t_primitiveList	*element;
 
 	if (!Class)
 		return ;
 
+	element = Class->instanceList;
+	while ((element = element->next))
+		Class->dealloc(element->content);
+	_deallocClass(Class);
+
+	Class = NULL;
+}
+
+void			___descriptionClass()
+{
+	t_primitiveList	*element;
+
 	printf("Class: [ ");
-	if ((element = Class->next))
+	if (Class)
 	{
-		Class->description(element->content);
-		while ((element = element->next))
+		printf("new: %p, dealloc: %p, description: %p, \n", Class->new, Class->dealloc, Class->description);
+		printf("         classList: [ ");
+		if ((element = Class->instanceList->next))
 		{
-			printf(", ");
 			Class->description(element->content);
+			while ((element = element->next))
+			{
+				printf(", \n                      ");
+				Class->description(element->content);
+			}
 		}
+		else
+			_descriptionNull(element);
+		printf(" ]");
 	}
 	else
-		Null->description(element);
+		_descriptionNull(Class);
 	printf(" ]");
+}
+
+t_class	*__classSubscriptInstance(void *instance)
+{
+	t_primitiveList	*element;
+
+	element = Class->instanceList;
+	while ((element = element->next))
+		if (classContainsInstance(element->content, instance))
+			return (element->content);
+	return (Null);
 }

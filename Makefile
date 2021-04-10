@@ -4,10 +4,10 @@ TESTNAME	= program.out
 SRCS		= \
 			  t_class/class.c \
 			  t_class/utils.c \
-			  t_class/primitiveList.c \
+			  t_class/t_primitiveList.c \
 			  t_class/t_class.c \
 			  t_class/t_null.c \
-			  t_list.c \
+			  t_list.c
 OBJS		= $(SRCS:.c=.o)
 
 TESTSRCS	= program.c
@@ -19,17 +19,18 @@ COMPILE		= $(CC) $(INCLUDE)
 
 
 
-.PHONY:		all debug setdebug
+.PHONY:		all debug test setdebug
 all:		$(NAME)
 debug:		setdebug $(NAME)
+test:		$(NAME) $(TESTNAME)
 setdebug:
 			$(eval OPTION = -g)
 
-test.out:	setdebug $(TESTOBJS)
-			$(COMPILE) $(OPTION) -L. -lcLibrary -o $(TESTNAME) $(TESTOBJS)
-
 $(NAME):	$(OBJS)
 			ar -rc $@ $^
+
+$(TESTNAME):	setdebug $(TESTOBJS)
+			$(COMPILE) $(OPTION) -L. -lcLibrary -o $(TESTNAME) $(TESTOBJS)
 
 %.o:		%.c
 			$(COMPILE) $(OPTION) -o $@ -c $<

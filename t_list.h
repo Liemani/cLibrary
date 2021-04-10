@@ -1,7 +1,7 @@
 #ifndef	T_LIST_H
 #define T_LIST_H
 
-#include "cLibrary.h"
+#include "class.h"
 
 
 
@@ -17,7 +17,7 @@ t_class	*List;
 
 void	setList();
 
-void	listAddElement(t_list *list, void *content)
+void	listAddElement(t_list *list, void *content);
 
 
 

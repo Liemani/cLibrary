@@ -2,29 +2,29 @@
 
 #include "class.h"
 
-static void	*_newNull()
+void	*_newNull()
 {
 	return (NULL);
 }
 
-static void	_deallocNull(void *)
+void	_deallocNull(void *null)
 {
 	return ;
 }
 
-static void	_descriptionNull(void *)
+void	_descriptionNull(void *null)
 {
 	printf("NULL");
 }
 
 void		setNull()
 {
-	if(Null)
+	if (!Class || classContainsInstance(Class, Null))
 		return ;
 
 	Null = Class->new();
 	Null->new = _newNull;
 	Null->dealloc = _deallocNull;
 	Null->description = _descriptionNull;
-	classAddInstance(nullClass, NULL);
+	classAddInstance(Null, NULL);
 }

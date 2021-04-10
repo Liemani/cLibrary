@@ -8,12 +8,14 @@ typedef struct	s_null
 	void		*null;
 }				t_null;
 
-t_null	Null;
+t_class	*Null;
 
 
 
 void	*_newNull();
-void	_deallocNull(void *);
-void	_descriptionNull(void *);
+void	_deallocNull(void *null);
+void	_descriptionNull(void *null);
 
 void	setNull();
+
+#endif

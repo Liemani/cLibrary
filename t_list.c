@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "cLibrary.h"
+#include "t_list.h"
+#include "class.h"
 
 
 
@@ -55,13 +56,13 @@ static void		_descriptionList(t_list *list)
 
 void			setList()
 {
-	if (List)
+	if (!Class || classContainsInstance(Class, List))
 		return ;
 
 	List = Class->new();
-	List->new = _newList;
-	List->dealloc = _deallocList;
-	List->description = _descriptionList;
+	List->new = (newType)_newList;
+	List->dealloc = (deallocType)_deallocList;
+	List->description = (descriptionType)_descriptionList;
 }
 
 void			listAddElement(t_list *list, void *content)

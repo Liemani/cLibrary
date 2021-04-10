@@ -24,13 +24,12 @@ void			_deallocPrimitiveList(t_primitiveList *list)
 	if (!list)
 		return ;
 
-	element = list->next;
-	while (element)
+	next = list->next;
+	while ((element = next))
 	{
 		next = element->next;
 		free(element->content);
 		free(element);
-		element = next;
 	}
 	free(list);
 }

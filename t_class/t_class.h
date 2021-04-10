@@ -2,7 +2,7 @@
 #define T_CLASS_H
 
 #include <stdbool.h>
-#include "t_classList.h"
+#include "t_primitiveList.h"
 
 
 

@@ -1,11 +1,11 @@
 #include "class.h"
 #include "t_list.h"
 
-int	program(int argc, mchar **argv);
+int	program(int argc, char **argv);
 
 int	main(int argc, char **argv)
 {
-	setClass();
+	___setClass();
 	setNull();
 	setList();
 
