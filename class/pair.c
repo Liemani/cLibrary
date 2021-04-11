@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "pair.h"
-#include "class.h"
+#include "class/pair.h"
+#include "t_class/class.h"
 
 
 

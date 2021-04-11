@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "class.h"
+#include "t_class/class.h"
 
 static t_class	*__newClass()
 {

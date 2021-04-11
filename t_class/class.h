@@ -1,9 +1,9 @@
 #ifndef CLASS_H
 #define CLASS_H
 
-#include "utils.h"
-#include "t_class.h"
-#include "t_null.h"
+#include "t_class/utils.h"
+#include "t_class/t_class.h"
+#include "t_class/t_null.h"
 
 
 

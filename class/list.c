@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "list.h"
-#include "class.h"
+#include "class/list.h"
+#include "t_class/class.h"
 
 
 

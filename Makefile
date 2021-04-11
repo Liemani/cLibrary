@@ -16,7 +16,7 @@ TESTSRCS	= program.c
 TESTOBJS	= $(TESTSRCS:.c=.o)
 
 CC			= clang
-INCLUDE		= -I t_class -I class
+INCLUDE		= -I .
 COMPILE		= $(CC) $(INCLUDE)
 
 

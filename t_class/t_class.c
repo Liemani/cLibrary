@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "class.h"
+#include "t_class/class.h"
 
 
 

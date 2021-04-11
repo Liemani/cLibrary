@@ -1,9 +1,9 @@
 #include <stdlib.h>
 
-#include "class.h"
-#include "list.h"
-#include "pair.h"
-#include "dictionary.h"
+#include "t_class/class.h"
+#include "class/list.h"
+#include "class/pair.h"
+#include "class/dictionary.h"
 
 int	program(int argc, char **argv);
 

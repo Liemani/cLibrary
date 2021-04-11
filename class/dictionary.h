@@ -1,8 +1,8 @@
 #ifndef	DICTIONARY_H
 #define DICTIONARY_H
 
-#include "class.h"
-#include "list.h"
+#include "t_class/class.h"
+#include "class/list.h"
 
 
 

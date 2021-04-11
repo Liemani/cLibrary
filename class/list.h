@@ -1,7 +1,7 @@
 #ifndef	LIST_H
 #define LIST_H
 
-#include "class.h"
+#include "t_class/class.h"
 
 
 

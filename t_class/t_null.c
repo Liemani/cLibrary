@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "class.h"
+#include "t_class/class.h"
 
 void	*_newNull()
 {

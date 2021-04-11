@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "dictionary.h"
-#include "class.h"
-#include "list.h"
-#include "pair.h"
+#include "class/dictionary.h"
+#include "t_class/class.h"
+#include "class/list.h"
+#include "class/pair.h"
 
 
 
