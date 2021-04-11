@@ -11,9 +11,9 @@ static t_list	*_newList()
 	t_list	*list;
 
 	lmtAlloc(list);
-	list->next = NULL;
-
 	classAddInstance(List, list);
+
+	list->next = NULL;
 
 	return (list);
 }

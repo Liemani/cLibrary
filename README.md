@@ -12,7 +12,8 @@ This library makes c language like OOP
 
 ## supporting type
 
-- t\_list  \*List
+- List  t\_list
+- Pair  t\_pair
 
 ## supporting method
 
@@ -20,7 +21,9 @@ This library makes c language like OOP
 - dealloc
 - description
 
-## Description
+## Feature
+
+This library use 'main()' internally. So instead of main(), you have to implement `int  program(int argc, char **argv)` which is called in main() of library.
 
 You can test the example `program.c` file.
 
@@ -35,9 +38,12 @@ Here is another features:
 
 `dealloc()` and `description()` function uses a appropriate function for the argument.
 
+All classes and instances will be freed when called exit() or return of main.
+
 ## Example
 
 ```c
+// program.c
 #include <stdio.h>                     
                                        
 #include "cLibrary.h"                  
@@ -130,4 +136,4 @@ For the features described above, this library has this structure:
 
 The function dealloc() or description() actually search it's argument and get the class structure, and call dealloc() or description() of that class structure.
 
-If you want to add your own Class type, you can add one and imitate t\_list. And modify `Makefile` and `cLibrary.h` a little, then it will work.
+If you want to add your own Class type, you can copy t\_template and imitate t\_list. And modify `Makefile` and `cLibrary.h` a little, then it will work.

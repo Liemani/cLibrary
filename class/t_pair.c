@@ -11,7 +11,6 @@ static t_pair	*_newPair()
 	t_pair	*pair;
 
 	lmtAlloc(pair);
-	
 	classAddInstance(Pair, pair);
 
 	return (pair);
@@ -40,7 +39,6 @@ static void		_descriptionPair(t_pair *pair)
 	printf(", value: ");
 	description(pair->value);
 	printf(" ]");
-
 }
 
 void			setPair()
