@@ -1,5 +1,5 @@
-#ifndef	T_LIST_H
-#define T_LIST_H
+#ifndef	LIST_H
+#define LIST_H
 
 #include "class.h"
 

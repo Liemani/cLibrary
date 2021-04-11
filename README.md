@@ -14,6 +14,7 @@ This library makes c language like OOP
 
 - List  t\_list
 - Pair  t\_pair
+- Dictionary  t\_dictionary
 
 ## supporting method
 
@@ -33,10 +34,10 @@ You can test the example `program.c` file.
 
 Here is another features:
 
-- `dealloc(<instance or Class>)`: dealloc \<instance\> or \<Class\>
-- `description(<instance or Class>)`: print description of \<instance\> or \<Class\>
+- `_dealloc(<instance or Class>)`: dealloc \<instance\> or \<Class\>
+- `_description(<instance or Class>)`: print description of \<instance\> or \<Class\>
 
-`dealloc()` and `description()` function uses a appropriate function for the argument.
+`_dealloc()` and `_description()` function uses a appropriate function for the argument.
 
 All classes and instances will be freed when called exit() or return of main.
 
@@ -54,37 +55,37 @@ int program(int argc, char **argv)
 {                                      
     t_list  *list;                     
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     printf("list = List->new(); \n\n");
     list = List->new();                
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     printf("dealloc(list); \n\n");     
-    dealloc(list);                     
+    _dealloc(list);                     
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     printf("dealloc(Null); \n\n");     
-    dealloc(Null);                     
+    _dealloc(Null);                     
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     printf("dealloc(List); \n\n");     
-    dealloc(List);                     
+    _dealloc(List);                     
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     printf("dealloc(Class); \n\n");    
-    dealloc(Class);                    
+    _dealloc(Class);                    
                                        
-    description(Class);                
+    _description(Class);                
     printf("\n\n");                    
                                        
     return (0);                        

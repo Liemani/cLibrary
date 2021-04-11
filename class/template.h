@@ -1,5 +1,5 @@
-#ifndef	T_TEMPLATE_H
-#define T_TEMPLATE_H
+#ifndef	TEMPLATE_H
+#define TEMPLATE_H
 
 #include "class.h"
 

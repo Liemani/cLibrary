@@ -1,5 +1,5 @@
-#ifndef	T_PAIR_H
-#define T_PAIR_H
+#ifndef	PAIR_H
+#define PAIR_H
 
 #include "class.h"
 

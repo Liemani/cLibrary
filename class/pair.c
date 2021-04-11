@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "t_pair.h"
+#include "pair.h"
 #include "class.h"
 
 
@@ -30,14 +30,14 @@ static void		_descriptionPair(t_pair *pair)
 {
 	if (!pair)
 	{
-		description(pair);
+		_description(pair);
 		return ;
 	}
 
 	printf("t_pair: [ key: ");
-	description(pair->key);
+	_description(pair->key);
 	printf(", value: ");
-	description(pair->value);
+	_description(pair->value);
 	printf(" ]");
 }
 

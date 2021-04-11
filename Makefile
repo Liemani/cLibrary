@@ -7,8 +7,9 @@ SRCS		= \
 			  t_class/t_primitiveList.c \
 			  t_class/t_class.c \
 			  t_class/t_null.c \
-			  class/t_list.c \
-			  class/t_pair.c
+			  class/list.c \
+			  class/pair.c \
+			  class/dictionary.c
 OBJS		= $(SRCS:.c=.o)
 
 TESTSRCS	= program.c

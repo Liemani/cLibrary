@@ -7,9 +7,9 @@
 
 
 
-#define dealloc(argument) __classSubscriptInstance(argument)->dealloc(argument)
+#define _dealloc(argument) __classSubscriptInstance(argument)->dealloc(argument)
 
-#define description(argument) __classSubscriptInstance(argument)->description(argument)
+#define _description(argument) __classSubscriptInstance(argument)->description(argument)
 
 
 

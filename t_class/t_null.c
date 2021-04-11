@@ -14,7 +14,10 @@ void	_deallocNull(void *null)
 
 void	_descriptionNull(void *instance)
 {
-	printf("%p", instance);
+	if (instance)
+		printf("%p", instance);
+	else
+		printf("NULL");
 }
 
 void		setNull()

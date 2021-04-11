@@ -4,7 +4,20 @@
 
 
 
-#define EXECUTE	test001();
+#define EXECUTE	test002();
+
+void	test002()
+{
+	t_dictionary	*dictionary = Dictionary->new();
+
+	_description(dictionary);
+
+	dictionaryUpdate(dictionary, "hi", "there");
+	putchar('\n');
+
+	_description(dictionary);
+	putchar('\n');
+}
 
 void	test001()
 {
@@ -16,7 +29,7 @@ void	test001()
 
 	listAddElement(list, pair);
 
-	description(list);
+	_description(list);
 	putchar('\n');
 }
 
@@ -24,31 +37,31 @@ void	test000()
 {
 	t_list	*list;
 
-	description(Class);
+	_description(Class);
 	printf("\n\n");
 
 	printf("list = List->new(); \n\n");
 	list = List->new();
 
-	description(Class);
+	_description(Class);
 	printf("\n\n");
 
 	printf("dealloc(list); \n\n");
-	dealloc(list);
+	_dealloc(list);
 
-	description(Class);
+	_description(Class);
 	printf("\n\n");
 
 	printf("dealloc(Null); \n\n");
-	dealloc(Null);
+	_dealloc(Null);
 
-	description(Class);
+	_description(Class);
 	printf("\n\n");
 
 	printf("dealloc(List); \n\n");
-	dealloc(List);
+	_dealloc(List);
 
-	description(Class);
+	_description(Class);
 	printf("\n");
 }
 

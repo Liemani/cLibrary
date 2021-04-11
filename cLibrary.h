@@ -1,8 +1,9 @@
 #include <stdlib.h>
 
 #include "class.h"
-#include "t_list.h"
-#include "t_pair.h"
+#include "list.h"
+#include "pair.h"
+#include "dictionary.h"
 
 int	program(int argc, char **argv);
 
@@ -14,6 +15,7 @@ int	main(int argc, char **argv)
 	setNull();
 	setList();
 	setPair();
+	setDictionary();
 
 	atexit((atexitType)kernelClass.dealloc);
 

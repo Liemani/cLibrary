@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "t_list.h"
+#include "list.h"
 #include "class.h"
 
 
@@ -39,18 +39,24 @@ static void		_deallocList(t_list *list)
 
 static void		_descriptionList(t_list *list)
 {
+	if (!list)
+	{
+		_description(list);
+		return ;
+	}
+
 	printf("t_list: [ ");
 	if ((list = list->next))
 	{
-		description(list->content);
+		_description(list->content);
 		while ((list = list->next))
 		{
 			printf(", ");
-			description(list->content);
+			_description(list->content);
 		}
 	}
 	else
-		description(list);
+		_description(list);
 	printf(" ]");
 }
 
