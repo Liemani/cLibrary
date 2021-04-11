@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	setPair();
 	setDictionary();
 
-	atexit((atexitType)kernelClass.dealloc);
+	atexit((atexitType)KernelClass.dealloc);
 
 	return (program(argc, argv));
 }

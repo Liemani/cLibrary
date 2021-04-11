@@ -27,15 +27,22 @@ void	_deallocClass(t_class *class)
 
 void	_descriptionClass(t_class *class)
 {
-	printf("t_class: [ ");
+	printf("{ \"type\": \"Class\"");
 	if (class)
 	{
-		printf("new: %p, dealloc: %p, description: %p, ", class->new, class->dealloc, class->description);
+		printf(", \"new\": ");
+		_descriptionNull(class->new);
+		printf(", \"dealloc\": ");
+		_descriptionNull(class->dealloc);
+		printf(", \"description\": ");
+		_descriptionNull(class->description);
+		printf(", ");
+		printf("\"instances\": ");
 		_descriptionPrimitiveList(class->instanceList);
 	}
 	else
 		_descriptionNull(class);
-	printf(" ]");
+	printf(" }");
 }
 
 void	classAddInstance(t_class *class, void *instance)

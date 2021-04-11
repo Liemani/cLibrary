@@ -34,11 +34,11 @@ static void		_descriptionPair(t_pair *pair)
 		return ;
 	}
 
-	printf("t_pair: [ key: ");
+	printf("{ \"type\": \"Pair\", \"key\": ");
 	_description(pair->key);
-	printf(", value: ");
+	printf(", \"value\": ");
 	_description(pair->value);
-	printf(" ]");
+	printf(" }");
 }
 
 void			setPair()

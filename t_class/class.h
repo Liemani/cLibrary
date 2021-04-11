@@ -13,7 +13,7 @@
 
 
 
-t_class	kernelClass;
+t_class	KernelClass;
 t_class	*Class;
 
 

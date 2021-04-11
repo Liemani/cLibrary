@@ -36,14 +36,14 @@ void			_deallocPrimitiveList(t_primitiveList *list)
 
 void			_descriptionPrimitiveList(t_primitiveList *list)
 {
-	printf("t_primitiveList: [ ");
+	printf("[ ");
 	if ((list = list->next))
 	{
-		printf("%p", list->content);
+		_descriptionNull(list->content);
 		while ((list = list->next))
 		{
 			printf(", ");
-			printf("%p", list->content);
+			_descriptionNull(list->content);
 		}
 	}
 	else

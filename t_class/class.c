@@ -50,17 +50,22 @@ static void		___descriptionClass()
 {
 	t_primitiveList	*element;
 
-	printf("Class: [ ");
+	printf("{ \"type\": \"KernelClass\"");
 	if (Class)
 	{
-		printf("new: %p, dealloc: %p, description: %p, \n", Class->new, Class->dealloc, Class->description);
-		printf("         classList: [ ");
+		printf(", \"new\": ");
+		_descriptionNull(Class->new);
+		printf(", \"dealloc\": ");
+		_descriptionNull(Class->dealloc);
+		printf(", \"description\": ");
+		_descriptionNull(Class->description);
+		printf(", \"classes\": [ ");
 		if ((element = Class->instanceList->next))
 		{
 			__descriptionClass(element->content);
 			while ((element = element->next))
 			{
-				printf(", \n                      ");
+				printf(", ");
 				__descriptionClass(element->content);
 			}
 		}
@@ -70,7 +75,7 @@ static void		___descriptionClass()
 	}
 	else
 		_descriptionNull(Class);
-	printf(" ]");
+	printf(" }");
 }
 
 void			setClass()
@@ -80,8 +85,8 @@ void			setClass()
 	Class->dealloc = __deallocClass;
 	Class->description = __descriptionClass;
 
-	kernelClass.dealloc = ___deallocClass;
-	kernelClass.description = ___descriptionClass;
+	KernelClass.dealloc = ___deallocClass;
+	KernelClass.description = ___descriptionClass;
 }
 
 t_class	*__classSubscriptInstance(void *instance)
@@ -89,7 +94,7 @@ t_class	*__classSubscriptInstance(void *instance)
 	t_primitiveList	*element;
 
 	if (instance == Class)
-		return (&kernelClass);
+		return (&KernelClass);
 
 	element = Class->instanceList;
 	while ((element = element->next))

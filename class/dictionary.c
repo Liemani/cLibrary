@@ -41,20 +41,28 @@ static void		_deallocDictionary(t_dictionary *dictionary)
 
 static void		_descriptionDictionary(t_dictionary *dictionary)
 {
+	t_pair	*pair;
+
 	if (!dictionary)
 	{
 		_description(dictionary);
 		return ;
 	}
 
-	printf("t_dictionary: [ ");
+	printf("[ ");
 	if ((dictionary = dictionary->next))
 	{
-		_description(dictionary->content);
+		pair = dictionary->content;
+		_description(pair->key);
+		printf(": ");
+		_description(pair->value);
 		while ((dictionary = dictionary->next))
 		{
+			pair = dictionary->content;
 			printf(", ");
-			_description(dictionary->content);
+			_description(pair->key);
+			printf(": ");
+			_description(pair->value);
 		}
 	}
 	else

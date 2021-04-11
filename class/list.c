@@ -45,7 +45,7 @@ static void		_descriptionList(t_list *list)
 		return ;
 	}
 
-	printf("t_list: [ ");
+	printf("[ ");
 	if ((list = list->next))
 	{
 		_description(list->content);
