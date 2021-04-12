@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "kernelClass/class.h"
 #include "class/pair.h"
-#include "t_class/class.h"
 
 
 
-static t_pair	*_newPair()
+static t_pair	*newPair()
 {
 	t_pair	*pair;
 
@@ -16,7 +16,7 @@ static t_pair	*_newPair()
 	return (pair);
 }
 
-static void		_deallocPair(t_pair *pair)
+static void		deallocPair(t_pair *pair)
 {
 	if (!pair)
 		return ;
@@ -26,7 +26,7 @@ static void		_deallocPair(t_pair *pair)
 	free(pair);
 }
 
-static void		_descriptionPair(t_pair *pair)
+static void		descriptionPair(t_pair *pair)
 {
 	if (!pair)
 	{
@@ -34,7 +34,8 @@ static void		_descriptionPair(t_pair *pair)
 		return ;
 	}
 
-	printf("{ \"type\": \"Pair\", \"key\": ");
+	printf("{ \"type\": \"Pair\"");
+	printf(", \"key\": ");
 	_description(pair->key);
 	printf(", \"value\": ");
 	_description(pair->value);
@@ -47,7 +48,7 @@ void			setPair()
 		return ;
 
 	Pair = Class->new();
-	Pair->new = (newType)_newPair;
-	Pair->dealloc = (deallocType)_deallocPair;
-	Pair->description = (descriptionType)_descriptionPair;
+	Pair->new = (newType)newPair;
+	Pair->dealloc = (deallocType)deallocPair;
+	Pair->description = (descriptionType)descriptionPair;
 }

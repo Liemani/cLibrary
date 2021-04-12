@@ -1,7 +1,7 @@
 #ifndef	PAIR_H
 #define PAIR_H
 
-#include "t_class/class.h"
+#include "kernelClass/class.h"
 
 
 

@@ -1,9 +1,11 @@
 #ifndef	LIST_H
 #define LIST_H
 
-#include "t_class/class.h"
+#include "kernelClass/class.h"
 
 
+
+typedef struct		s_class t_class;
 
 typedef struct		s_list
 {

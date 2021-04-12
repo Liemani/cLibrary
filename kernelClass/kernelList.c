@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "t_class/class.h"
+#include "kernelClass/class.h"
 
 
 
-t_primitiveList	*_newPrimitiveList()
+t_kernelList	*newKernelList()
 {
-	t_primitiveList	*list;
+	t_kernelList	*list;
 
 	lmtAlloc(list);
 	list->next = NULL;
@@ -16,10 +16,10 @@ t_primitiveList	*_newPrimitiveList()
 	return (list);
 }
 
-void			_deallocPrimitiveList(t_primitiveList *list)
+void			deallocKernelList(t_kernelList *list)
 {
-	t_primitiveList	*element;
-	t_primitiveList	*next;
+	t_kernelList	*element;
+	t_kernelList	*next;
 
 	if (!list)
 		return ;
@@ -28,32 +28,31 @@ void			_deallocPrimitiveList(t_primitiveList *list)
 	while ((element = next))
 	{
 		next = element->next;
-		free(element->content);
 		free(element);
 	}
 	free(list);
 }
 
-void			_descriptionPrimitiveList(t_primitiveList *list)
+void			descriptionKernelList(t_kernelList *list)
 {
 	printf("[ ");
 	if ((list = list->next))
 	{
-		_descriptionNull(list->content);
+		descriptionPointer(list->content);
 		while ((list = list->next))
 		{
 			printf(", ");
-			_descriptionNull(list->content);
+			descriptionPointer(list->content);
 		}
 	}
 	else
-		_descriptionNull(list);
+		descriptionPointer(list);
 	printf(" ]");
 }
 
-void			primitiveListAddContent(t_primitiveList *list, void *content)
+void			kernelListAddContent(t_kernelList *list, void *content)
 {
-	t_primitiveList	*element;
+	t_kernelList	*element;
 
 	if (!list)
 		return ;
@@ -64,10 +63,10 @@ void			primitiveListAddContent(t_primitiveList *list, void *content)
 	list->next = element;
 }
 
-void			primitiveListRemoveContent(t_primitiveList *list, void *content)
+void			kernelListRemoveContent(t_kernelList *list, void *content)
 {
-	t_primitiveList	*previous;
-	t_primitiveList	*element;
+	t_kernelList	*previous;
+	t_kernelList	*element;
 
 	if (!list)
 		return ;
@@ -85,7 +84,7 @@ void			primitiveListRemoveContent(t_primitiveList *list, void *content)
 	}
 }
 
-bool			primitiveListContainsContent(t_primitiveList *list, void *content)
+bool			kernelListContainsContent(t_kernelList *list, void *content)
 {
 	if (!list)
 		return (false);

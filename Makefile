@@ -2,12 +2,12 @@ NAME		= libcLibrary.a
 TESTNAME	= program.out
 
 SRCS		= \
-			  t_class/class.c \
-			  t_class/utils.c \
-			  t_class/t_primitiveList.c \
-			  t_class/t_class.c \
-			  t_class/t_null.c \
-			  class/list.c \
+			  kernelClass/class.c \
+			  kernelClass/utils.c \
+			  kernelClass/kernelList.c \
+			  kernelClass/pointer.c \
+			  kernelClass/string.c \
+			  kernelClass/list.c \
 			  class/pair.c \
 			  class/dictionary.c
 OBJS		= $(SRCS:.c=.o)
@@ -24,7 +24,7 @@ COMPILE		= $(CC) $(INCLUDE)
 .PHONY:		all debug test setdebug
 all:		$(NAME)
 debug:		setdebug $(NAME)
-test:		$(NAME) $(TESTNAME)
+test:		setdebug $(NAME) $(TESTNAME)
 setdebug:
 			$(eval OPTION = -g)
 

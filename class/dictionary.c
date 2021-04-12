@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "kernelClass/class.h"
 #include "class/dictionary.h"
-#include "t_class/class.h"
-#include "class/list.h"
 #include "class/pair.h"
 
 
 
-static t_dictionary	*_newDictionary()
+static t_dictionary	*newDictionary()
 {
 	t_dictionary	*dictionary;
 
@@ -20,7 +19,7 @@ static t_dictionary	*_newDictionary()
 	return (dictionary);
 }
 
-static void		_deallocDictionary(t_dictionary *dictionary)
+static void		deallocDictionary(t_dictionary *dictionary)
 {
 	t_dictionary	*element;
 	t_dictionary	*next;
@@ -39,7 +38,7 @@ static void		_deallocDictionary(t_dictionary *dictionary)
 	free(dictionary);
 }
 
-static void		_descriptionDictionary(t_dictionary *dictionary)
+static void		descriptionDictionary(t_dictionary *dictionary)
 {
 	t_pair	*pair;
 
@@ -76,9 +75,9 @@ void			setDictionary()
 		return ;
 
 	Dictionary = Class->new();
-	Dictionary->new = (newType)_newDictionary;
-	Dictionary->dealloc = (deallocType)_deallocDictionary;
-	Dictionary->description = (descriptionType)_descriptionDictionary;
+	Dictionary->new = (newType)newDictionary;
+	Dictionary->dealloc = (deallocType)deallocDictionary;
+	Dictionary->description = (descriptionType)descriptionDictionary;
 }
 
 static t_pair	*dictionaryGetPair(t_dictionary *dictionary, void *key)

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 
-#include "t_class/class.h"
-#include "class/list.h"
+#include "kernelClass/class.h"
 #include "class/pair.h"
 #include "class/dictionary.h"
 
@@ -12,7 +11,8 @@ typedef void	(*atexitType)(void);
 int	main(int argc, char **argv)
 {
 	setClass();
-	setNull();
+	setPointer();
+	setString();
 	setList();
 	setPair();
 	setDictionary();

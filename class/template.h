@@ -1,19 +1,17 @@
 #ifndef	TEMPLATE_H
 #define TEMPLATE_H
 
-#include "class.h"
+#include "kernelClass/class.h"
 
 
 
-typedef struct	s_template
-{
-}				t_template;
+typedef struct	s_template t_template;
 
-t_class	*Template;
+t_class			*Template;
 
 
 
-void	setTemplate();
+void			setTemplate();
 
 
 

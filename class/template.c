@@ -6,7 +6,7 @@
 
 
 
-static t_template	*_newTemplate()
+static t_template	*newTemplate()
 {
 	t_template	*template;
 
@@ -18,7 +18,7 @@ static t_template	*_newTemplate()
 	return (template);
 }
 
-static void		_deallocTemplate(t_template *template)
+static void		deallocTemplate(t_template *template)
 {
 	if (!template)
 		return ;
@@ -30,7 +30,7 @@ static void		_deallocTemplate(t_template *template)
 	free(template);
 }
 
-static void		_descriptionTemplate(t_template *template)
+static void		descriptionTemplate(t_template *template)
 {
 	if (!template)
 	{
@@ -38,11 +38,11 @@ static void		_descriptionTemplate(t_template *template)
 		return ;
 	}
 
-	printf("t_template: [ ");
+	printf("{ \"type\": \"template\"");
 
 	// custome description code here..
 
-	printf(" ]");
+	printf(" }");
 }
 
 void			setTemplate()
@@ -51,7 +51,7 @@ void			setTemplate()
 		return ;
 
 	Template = Class->new();
-	Template->new = (newType)_newTemplate;
-	Template->dealloc = (deallocType)_deallocTemplate;
-	Template->description = (descriptionType)_descriptionTemplate;
+	Template->new = (newType)newTemplate;
+	Template->dealloc = (deallocType)deallocTemplate;
+	Template->description = (descriptionType)descriptionTemplate;
 }

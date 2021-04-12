@@ -12,9 +12,11 @@ This library makes c language like OOP
 
 ## supporting type
 
-- List  t\_list
-- Pair  t\_pair
-- Dictionary  t\_dictionary
+- Class         t\_class
+- List          t\_list
+- Pair          t\_pair
+- Dictionary    t\_dictionary
+- String        t\_string
 
 ## supporting method
 

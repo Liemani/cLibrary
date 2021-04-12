@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "class/list.h"
-#include "t_class/class.h"
+#include "kernelClass/class.h"
 
 
 
-static t_list	*_newList()
+static t_list	*newList()
 {
 	t_list	*list;
 
@@ -18,7 +17,7 @@ static t_list	*_newList()
 	return (list);
 }
 
-static void		_deallocList(t_list *list)
+static void		deallocList(t_list *list)
 {
 	t_list	*element;
 	t_list	*next;
@@ -37,7 +36,7 @@ static void		_deallocList(t_list *list)
 	free(list);
 }
 
-static void		_descriptionList(t_list *list)
+static void		descriptionList(t_list *list)
 {
 	if (!list)
 	{
@@ -66,9 +65,9 @@ void			setList()
 		return ;
 
 	List = Class->new();
-	List->new = (newType)_newList;
-	List->dealloc = (deallocType)_deallocList;
-	List->description = (descriptionType)_descriptionList;
+	List->new = (newType)newList;
+	List->dealloc = (deallocType)deallocList;
+	List->description = (descriptionType)descriptionList;
 }
 
 void			listAddElement(t_list *list, void *content)

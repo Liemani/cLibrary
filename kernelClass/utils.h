@@ -5,12 +5,6 @@
 
 
 
-#define lmtNew(class, instance) \
-	t_ ## instance	*instance; \
-	 \
-	instance = lmtAlloc(instance); \
-	classAddInstance(class, instance)
-
 #define lmtAlloc(argument) _lmtAlloc((void **)&argument, sizeof(*argument))
 
 

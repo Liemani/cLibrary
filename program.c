@@ -4,7 +4,7 @@
 
 
 
-#define EXECUTE	test002();
+#define EXECUTE	test000();
 
 void	test002()
 {
@@ -52,8 +52,8 @@ void	test000()
 	_description(Class);
 	printf("\n\n");
 
-	printf("dealloc(Null); \n\n");
-	_dealloc(Null);
+	printf("dealloc(Pointer); \n\n");
+	_dealloc(Pointer);
 
 	_description(Class);
 	printf("\n\n");
