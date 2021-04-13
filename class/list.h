@@ -5,8 +5,6 @@
 
 
 
-typedef struct		s_class t_class;
-
 typedef struct		s_list
 {
 	void			*content;
@@ -17,7 +15,7 @@ t_class	*List;
 
 
 
-void	setList();
+void	setListClass();
 
 void	listAddElement(t_list *list, void *content);
 

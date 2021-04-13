@@ -26,23 +26,29 @@ static void		deallocPair(t_pair *pair)
 	free(pair);
 }
 
-static void		descriptionPair(t_pair *pair)
+static t_string	*descriptionPair(t_pair *pair)
 {
+	t_string	*string;
+
+	string = String->new();
+
 	if (!pair)
 	{
-		_description(pair);
-		return ;
+		stringMergeString(string, description(pair));
+		return (string);
 	}
 
-	printf("{ \"type\": \"Pair\"");
-	printf(", \"key\": ");
-	_description(pair->key);
-	printf(", \"value\": ");
-	_description(pair->value);
-	printf(" }");
+	stringAppendStr(string, "{ \"type\": \"Pair\"");
+	stringAppendStr(string, ", \"key\": ");
+	stringMergeString(string, description(pair->key));
+	stringAppendStr(string, ", \"value\": ");
+	stringMergeString(string, description(pair->value));
+	stringAppendStr(string, " }");
+
+	return (string);
 }
 
-void			setPair()
+void			setPairClass()
 {
 	if (!Class || classContainsInstance(Class, Pair))
 		return ;

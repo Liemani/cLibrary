@@ -7,7 +7,7 @@ SRCS		= \
 			  kernelClass/kernelList.c \
 			  kernelClass/pointer.c \
 			  kernelClass/string.c \
-			  kernelClass/list.c \
+			  class/list.c \
 			  class/pair.c \
 			  class/dictionary.c
 OBJS		= $(SRCS:.c=.o)
@@ -24,7 +24,7 @@ COMPILE		= $(CC) $(INCLUDE)
 .PHONY:		all debug test setdebug
 all:		$(NAME)
 debug:		setdebug $(NAME)
-test:		setdebug $(NAME) $(TESTNAME)
+test:		fclean setdebug $(NAME) $(TESTNAME)
 setdebug:
 			$(eval OPTION = -g)
 

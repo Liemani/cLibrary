@@ -11,7 +11,7 @@ t_class			*Template;
 
 
 
-void			setTemplate();
+void			setTemplateClass();
 
 
 

@@ -33,21 +33,26 @@ void			deallocKernelList(t_kernelList *list)
 	free(list);
 }
 
-void			descriptionKernelList(t_kernelList *list)
+t_string		*descriptionKernelList(t_kernelList *list)
 {
-	printf("[ ");
+	t_string	*string;
+
+	string = String->new();
+	stringAppendStr(string, "[ ");
 	if ((list = list->next))
 	{
-		descriptionPointer(list->content);
+		stringMergeString(string, descriptionPointer(list->content));
 		while ((list = list->next))
 		{
-			printf(", ");
-			descriptionPointer(list->content);
+			stringAppendStr(string, ", ");
+			stringMergeString(string, descriptionPointer(list->content));
 		}
 	}
 	else
-		descriptionPointer(list);
-	printf(" ]");
+		stringMergeString(string, descriptionPointer(list));
+	stringAppendStr(string, " ]");
+
+	return (string);
 }
 
 void			kernelListAddContent(t_kernelList *list, void *content)

@@ -1,22 +1,58 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "kernelClass/class.h"
 
+#define MAX_HEX_ADDRESS_LEN 32
+#define HEX_DECIMAL "0123456789abcdef"
+
+
+
+static char	*ft_ultox(unsigned long int n)
+{
+	char	tmp[MAX_HEX_ADDRESS_LEN];
+	char	*p_tmp;
+	char	*result;
+	char	*p_result;
+
+	p_tmp = tmp;
+	*p_tmp++ = HEX_DECIMAL[n % 16];
+	while ((n /= 16))
+		*p_tmp++ = HEX_DECIMAL[n % 16];
+	if (!(result = malloc(sizeof(*result) * ((p_tmp - tmp) + 1))))
+		return (0);
+	p_result = result;
+	while (tmp != p_tmp)
+		*p_result++ = *(--p_tmp);
+	*p_result = '\0';
+	return (result);
+}
 
 void		deallocPointer(t_pointer *pointer)
 {
 	return ;
 }
 
-void		descriptionPointer(t_pointer *pointer)
+t_string	*descriptionPointer(t_pointer *pointer)
 {
+	t_string	*string;
+
+	string = String->new();
 	if (pointer)
-		printf("\"%p\"", pointer);
+	{
+		char *hexString = ft_ultox((unsigned long)pointer);
+		stringAppendStr(string, "\"0x");
+		stringAppendStr(string, hexString);
+		stringAppendStr(string, "\"");
+		free(hexString);
+	}
 	else
-		printf("null");
+		stringAppendStr(string, "null");
+
+	return (string);
 }
 
-void		setPointer()
+void		setPointerClass()
 {
 	if (!Class || classContainsInstance(Class, Pointer))
 		return ;

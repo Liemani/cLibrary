@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "kernelClass/class.h"
+#include "class/list.h"
 
 
 
@@ -36,30 +36,36 @@ static void		deallocList(t_list *list)
 	free(list);
 }
 
-static void		descriptionList(t_list *list)
+static t_string	*descriptionList(t_list *list)
 {
+	t_string	*string;
+
+	string = String->new();
+
 	if (!list)
 	{
-		_description(list);
-		return ;
+		stringMergeString(string, description(list));
+		return (string);
 	}
 
-	printf("[ ");
+	stringAppendStr(string, "[ ");
 	if ((list = list->next))
 	{
-		_description(list->content);
+		stringMergeString(string, description(list->content));
 		while ((list = list->next))
 		{
-			printf(", ");
-			_description(list->content);
+			stringAppendStr(string, ", ");
+			stringMergeString(string, description(list->content));
 		}
 	}
 	else
-		_description(list);
-	printf(" ]");
+		stringMergeString(string, description(list));
+	stringAppendStr(string, " ]");
+
+	return (string);
 }
 
-void			setList()
+void			setListClass()
 {
 	if (!Class || classContainsInstance(Class, List))
 		return ;

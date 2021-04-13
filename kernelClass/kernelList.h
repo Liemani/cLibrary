@@ -3,15 +3,21 @@
 
 #include <stdbool.h>
 
-#include "list.h"
+#include "kernelClass/class.h"
 
 
 
-typedef t_list	t_kernelList;
+typedef struct			s_kernelList
+{
+	void				*content;
+	struct s_kernelList	*next;
+}						t_kernelList;
+
+typedef struct	s_string t_string;
 
 t_kernelList	*newKernelList();
 void			deallocKernelList(t_kernelList *list);
-void			descriptionKernelList(t_kernelList *list);
+t_string		*descriptionKernelList(t_kernelList *list);
 
 void			kernelListAddContent(t_kernelList *list, void *content);
 void			kernelListRemoveContent(t_kernelList *list, void *content);

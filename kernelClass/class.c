@@ -37,24 +37,28 @@ static void		deallocClass(t_class *class)
 	free(class);
 }
 
-static void		descriptionClass(t_class *class)
+static t_string	*descriptionClass(t_class *class)
 {
-	printf("{ \"type\": \"Class\"");
+	t_string	*string;
+
+	string = String->new();
+	stringAppendStr(string, "{ \"type\": \"Class\"");
 	if (class)
 	{
-		printf(", \"new\": ");
-		descriptionPointer(class->new);
-		printf(", \"dealloc\": ");
-		descriptionPointer(class->dealloc);
-		printf(", \"description\": ");
-		descriptionPointer(class->description);
-		printf(", ");
-		printf("\"instances\": ");
-		descriptionKernelList(class->instanceList);
+		stringAppendStr(string, ", \"new\": ");
+		stringMergeString(string, descriptionPointer(class->new));
+		stringAppendStr(string, ", \"dealloc\": ");
+		stringMergeString(string, descriptionPointer(class->dealloc));
+		stringAppendStr(string, ", \"description\": ");
+		stringMergeString(string, descriptionPointer(class->description));
+		stringAppendStr(string, ", \"instances\": ");
+		stringMergeString(string, descriptionKernelList(class->instanceList));
 	}
 	else
-		descriptionPointer(class);
-	printf(" }");
+		stringMergeString(string, descriptionPointer(class));
+	stringAppendStr(string, " }");
+
+	return (string);
 }
 
 static void		_deallocClass()
@@ -77,39 +81,47 @@ static void		_deallocClass()
 	Class = NULL;
 }
 
-static void		_descriptionClass()
+static t_string	*_descriptionClass()
 {
+	t_string		*string;
 	t_kernelList	*element;
 
-	printf("{ \"type\": \"KernelClass\"");
+	if (Class)
+		string = String->new();
+	else
+		string = _newString();
+
+	stringAppendStr(string, "{ \"type\": \"KernelClass\"");
 	if (Class)
 	{
-		printf(", \"new\": ");
-		descriptionPointer(Class->new);
-		printf(", \"dealloc\": ");
-		descriptionPointer(Class->dealloc);
-		printf(", \"description\": ");
-		descriptionPointer(Class->description);
-		printf(", \"classes\": [ ");
+		stringAppendStr(string, ", \"new\": ");
+		stringMergeString(string, descriptionPointer(Class->new));
+		stringAppendStr(string, ", \"dealloc\": ");
+		stringMergeString(string, descriptionPointer(Class->dealloc));
+		stringAppendStr(string, ", \"description\": ");
+		stringMergeString(string, descriptionPointer(Class->description));
+		stringAppendStr(string, ", \"classes\": [ ");
 		if ((element = Class->instanceList->next))
 		{
-			descriptionClass(element->content);
+			stringMergeString(string, descriptionClass(element->content));
 			while ((element = element->next))
 			{
-				printf(", ");
-				descriptionClass(element->content);
+				stringAppendStr(string, ", ");
+				stringMergeString(string, descriptionClass(element->content));
 			}
 		}
 		else
-			descriptionPointer(element);
-		printf(" ]");
+			stringMergeString(string, descriptionPointer(element));
+		stringAppendStr(string, " ]");
 	}
 	else
-		descriptionPointer(Class);
-	printf(" }");
+		stringMergeString(string, descriptionPointer(Class));
+	stringAppendStr(string, " }");
+
+	return (string);
 }
 
-void			setClass()
+void			setClassClass()
 {
 	KernelClass.dealloc = _deallocClass;
 	KernelClass.description = _descriptionClass;
@@ -119,9 +131,12 @@ void			setClass()
 	Class->dealloc = (deallocType)deallocClass;
 	Class->description = (descriptionType)descriptionClass;
 	Class->instanceList = newKernelList();
+
+	setPointerClass();
+	setStringClass();
 }
 
-void	classAddInstance(t_class *class, void *instance)
+void			classAddInstance(t_class *class, void *instance)
 {
 	if (!class)
 		return ;
@@ -130,7 +145,7 @@ void	classAddInstance(t_class *class, void *instance)
 		kernelListAddContent(class->instanceList, instance);
 }
 
-void	classRemoveInstance(t_class *class, void *instance)
+void			classRemoveInstance(t_class *class, void *instance)
 {
 	if (!class)
 		return ;
@@ -138,7 +153,7 @@ void	classRemoveInstance(t_class *class, void *instance)
 	kernelListRemoveContent(class->instanceList, instance);
 }
 
-bool	classContainsInstance(t_class *class, void *instance)
+bool			classContainsInstance(t_class *class, void *instance)
 {
 	if (!class)
 		return (false);
@@ -146,7 +161,7 @@ bool	classContainsInstance(t_class *class, void *instance)
 	return (kernelListContainsContent(class->instanceList, instance));
 }
 
-t_class	*_classSubscriptInstance(void *instance)
+static t_class	*_classSubscriptInstance(void *instance)
 {
 	t_kernelList	*element;
 
@@ -162,4 +177,14 @@ t_class	*_classSubscriptInstance(void *instance)
 			return (element->content);
 	}
 	return (Pointer);
+}
+
+void			dealloc(void *instance)
+{
+	_classSubscriptInstance(instance)->dealloc(instance);
+}
+
+t_string		*description(void *instance)
+{
+	return (_classSubscriptInstance(instance)->description(instance));
 }

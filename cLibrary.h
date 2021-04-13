@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "kernelClass/class.h"
+#include "class/list.h"
 #include "class/pair.h"
 #include "class/dictionary.h"
 
@@ -10,12 +11,10 @@ typedef void	(*atexitType)(void);
 
 int	main(int argc, char **argv)
 {
-	setClass();
-	setPointer();
-	setString();
-	setList();
-	setPair();
-	setDictionary();
+	setClassClass();
+	setListClass();
+	setPairClass();
+	setDictionaryClass();
 
 	atexit((atexitType)KernelClass.dealloc);
 

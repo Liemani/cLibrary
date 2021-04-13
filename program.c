@@ -4,19 +4,47 @@
 
 
 
-#define EXECUTE	test000();
+#define EXECUTE	test003();
+
+void	test004()
+{
+	t_dictionary	*dictionary = Dictionary->new();
+
+	t_string		*key = initString("hi!");
+	t_string		*value = initString("there!");
+
+	dictionaryUpdate(dictionary, key, value);
+
+	stringPrettyFlush(description(dictionary));
+	printf("\n\n");
+
+	stringPrettyFlush(description(String));
+	printf("\n\n");
+
+	stringPrettyFlush(description(Dictionary));
+	printf("\n\n");
+
+	stringPrettyFlush(description(Class));
+	printf("\n");
+}
+
+void	test003()
+{
+	t_string *string = String->new();
+
+	setString(string, "hi");
+	stringFlush(description(string));
+}
 
 void	test002()
 {
 	t_dictionary	*dictionary = Dictionary->new();
 
-	_description(dictionary);
+	stringFlush(description(dictionary));
 
 	dictionaryUpdate(dictionary, "hi", "there");
-	putchar('\n');
 
-	_description(dictionary);
-	putchar('\n');
+	stringFlush(description(dictionary));
 }
 
 void	test001()
@@ -29,7 +57,7 @@ void	test001()
 
 	listAddElement(list, pair);
 
-	_description(list);
+	stringFlush(description(list));
 	putchar('\n');
 }
 
@@ -37,31 +65,34 @@ void	test000()
 {
 	t_list	*list;
 
-	_description(Class);
+	stringFlush(description(Class));
 	printf("\n\n");
 
 	printf("list = List->new(); \n\n");
 	list = List->new();
 
-	_description(Class);
+	stringFlush(description(Class));
 	printf("\n\n");
 
 	printf("dealloc(list); \n\n");
-	_dealloc(list);
+	stringFlush(description(list));
+	printf("\n\n");
 
-	_description(Class);
+	stringFlush(description(Class));
 	printf("\n\n");
 
 	printf("dealloc(Pointer); \n\n");
-	_dealloc(Pointer);
+	stringFlush(description(Pointer));
+	printf("\n\n");
 
-	_description(Class);
+	stringFlush(description(Class));
 	printf("\n\n");
 
 	printf("dealloc(List); \n\n");
-	_dealloc(List);
+	stringFlush(description(list));
+	printf("\n\n");
 
-	_description(Class);
+	stringFlush(description(Class));
 	printf("\n");
 }
 

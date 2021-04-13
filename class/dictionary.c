@@ -3,6 +3,7 @@
 
 #include "kernelClass/class.h"
 #include "class/dictionary.h"
+#include "class/list.h"
 #include "class/pair.h"
 
 
@@ -33,43 +34,48 @@ static void		deallocDictionary(t_dictionary *dictionary)
 	while ((element = next))
 	{
 		next = element->next;
-		_dealloc(element);
+		dealloc(element);
 	}
 	free(dictionary);
 }
 
-static void		descriptionDictionary(t_dictionary *dictionary)
+static t_string	*descriptionDictionary(t_dictionary *dictionary)
 {
-	t_pair	*pair;
+	t_string	*string;
+	t_pair		*pair;
+
+	string = String->new();
 
 	if (!dictionary)
 	{
-		_description(dictionary);
-		return ;
+		stringMergeString(string, description(dictionary));
+		return (string);
 	}
 
-	printf("[ ");
+	stringAppendStr(string, "[ ");
 	if ((dictionary = dictionary->next))
 	{
 		pair = dictionary->content;
-		_description(pair->key);
-		printf(": ");
-		_description(pair->value);
+		stringMergeString(string, description(pair->key));
+		stringAppendStr(string, ": ");
+		stringMergeString(string, description(pair->value));
 		while ((dictionary = dictionary->next))
 		{
 			pair = dictionary->content;
-			printf(", ");
-			_description(pair->key);
-			printf(": ");
-			_description(pair->value);
+			stringAppendStr(string, ", ");
+			stringMergeString(string, description(pair->key));
+			stringAppendStr(string, ": ");
+			stringMergeString(string, description(pair->value));
 		}
 	}
 	else
-		_description(dictionary);
-	printf(" ]");
+		stringMergeString(string, description(dictionary));
+	stringAppendStr(string, " ]");
+
+	return (string);
 }
 
-void			setDictionary()
+void			setDictionaryClass()
 {
 	if (!Class || classContainsInstance(Class, Dictionary))
 		return ;

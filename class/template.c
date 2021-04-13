@@ -30,22 +30,27 @@ static void		deallocTemplate(t_template *template)
 	free(template);
 }
 
-static void		descriptionTemplate(t_template *template)
+static t_string	*descriptionTemplate(t_template *template)
 {
+	t_string	*string;
+
+	string = String->new();
 	if (!template)
 	{
-		description(template);
-		return ;
+		stringMergeString(string, description(template));
+		return (string);
 	}
 
-	printf("{ \"type\": \"template\"");
+	stringAppendStr(string, "{ \"type\": \"template\"");
 
 	// custome description code here..
 
-	printf(" }");
+	stringAppendStr(string, " }");
+
+	return (string);
 }
 
-void			setTemplate()
+void			setTemplateClass()
 {
 	if (!Class || classContainsInstance(Class, Template))
 		return ;

@@ -15,7 +15,7 @@ t_class	*Pair;
 
 
 
-void	setPair();
+void	setPairClass();
 
 
 

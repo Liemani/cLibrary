@@ -34,12 +34,19 @@ You can test the example `program.c` file.
 - `<Class>->dealloc(<instance>)`: dealloc \<instance\>
 - `<Class>->description(<instance>)`: print description of \<instance\>
 
-Here is another features:
+#### dealloc(), description()
 
-- `_dealloc(<instance or Class>)`: dealloc \<instance\> or \<Class\>
-- `_description(<instance or Class>)`: print description of \<instance\> or \<Class\>
+- `dealloc(<instance or Class>)`: dealloc \<instance\> or \<Class\>
+- `description(<instance or Class>)`: return `t\_string` describing \<instance\> or \<Class\>
 
-`_dealloc()` and `_description()` function uses a appropriate function for the argument.
+`dealloc()` and `description()` function uses a appropriate function for the argument.
+
+#### flushing t\_string
+
+- `stringFlush(<string>)` will print the value and dealloc string.
+- `stringprettyFlush(<string>)` will print the value pretty and dealloc string.
+
+#### memory management
 
 All classes and instances will be freed when called exit() or return of main.
 
@@ -53,82 +60,122 @@ All classes and instances will be freed when called exit() or return of main.
                                        
                                        
                                        
-int program(int argc, char **argv)     
-{                                      
-    t_list  *list;                     
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    printf("list = List->new(); \n\n");
-    list = List->new();                
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    printf("dealloc(list); \n\n");     
-    _dealloc(list);                     
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    printf("dealloc(Null); \n\n");     
-    _dealloc(Null);                     
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    printf("dealloc(List); \n\n");     
-    _dealloc(List);                     
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    printf("dealloc(Class); \n\n");    
-    _dealloc(Class);                    
-                                       
-    _description(Class);                
-    printf("\n\n");                    
-                                       
-    return (0);                        
-}                                      
+int	program(int argc, char **argv)
+{
+	t_dictionary	*dictionary = Dictionary->new();
+
+	t_string		*key = initString("hi!");
+	t_string		*value = initString("there!");
+
+	dictionaryUpdate(dictionary, key, value);
+
+	stringPrettyFlush(description(dictionary));
+	printf("\n\n");
+
+	stringPrettyFlush(description(String));
+	printf("\n\n");
+
+	stringPrettyFlush(description(Dictionary));
+	printf("\n\n");
+
+	stringPrettyFlush(description(Class));
+	printf("\n");
+
+	return (0);
+}
 ```
 
 ```zsh
 % make test
 ...
 % ./program.out
-Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
-         classList: [ t_class: [ new: 0x100f7bb60, dealloc: 0x100f7b9d4, description: 0x100f7ba48, t_primitiveList: [ NULL ] ],
-                      t_class: [ new: 0x100f7b840, dealloc: 0x100f7b84c, description: 0x100f7b85c, t_primitiveList: [ 0x0 ] ] ] ]
+[
+	"hi!": "there!"
+]
 
-list = List->new();
 
-Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
-         classList: [ t_class: [ new: 0x100f7bb60, dealloc: 0x100f7b9d4, description: 0x100f7ba48, t_primitiveList: [ 0x1276067b0 ] ],
-                      t_class: [ new: 0x100f7b840, dealloc: 0x100f7b84c, description: 0x100f7b85c, t_primitiveList: [ 0x0 ] ] ] ]
+{
+	"type": "Class",
+	"new": "0x10460af4c",
+	"dealloc": "0x10460a7a8",
+	"description": "0x10460a7f8",
+	"instances": [
+		"0x13d606a40",
+		"0x13d606910",
+		"0x13d6068b0",
+		"0x13d606880"
+	]
+}
 
-dealloc(list);
 
-Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
-         classList: [ t_class: [ new: 0x100f7bb60, dealloc: 0x100f7b9d4, description: 0x100f7ba48, t_primitiveList: [ NULL ] ],
-                      t_class: [ new: 0x100f7b840, dealloc: 0x100f7b84c, description: 0x100f7b85c, t_primitiveList: [ 0x0 ] ] ] ]
+{
+	"type": "Class",
+	"new": "0x10460b8ec",
+	"dealloc": "0x10460b588",
+	"description": "0x10460b5fc",
+	"instances": [
+		"0x13d606860"
+	]
+}
 
-dealloc(Null);
 
-Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
-         classList: [ t_class: [ new: 0x100f7bb60, dealloc: 0x100f7b9d4, description: 0x100f7ba48, t_primitiveList: [ NULL ] ] ] ]
-
-dealloc(List);
-
-Class: [ new: 0x100f7b1a4, dealloc: 0x100f7b070, description: 0x100f7b0b4,
-         classList: [ NULL ] ]
-
-dealloc(Class);
-
-Class: [ NULL ]
-
-%
+{
+	"type": "KernelClass",
+	"new": "0x10460a018",
+	"dealloc": "0x104609908",
+	"description": "0x104609998",
+	"classes": [
+		{
+			"type": "Class",
+			"new": "0x10460b8ec",
+			"dealloc": "0x10460b588",
+			"description": "0x10460b5fc",
+			"instances": [
+				"0x13d606860"
+			]
+		},
+		{
+			"type": "Class",
+			"new": "0x10460b4ac",
+			"dealloc": "0x10460b354",
+			"description": "0x10460b398",
+			"instances": [
+				"0x13d6068e0"
+			]
+		},
+		{
+			"type": "Class",
+			"new": "0x10460b26c",
+			"dealloc": "0x10460b044",
+			"description": "0x10460b0b8",
+			"instances": [
+				null
+			]
+		},
+		{
+			"type": "Class",
+			"new": "0x10460af4c",
+			"dealloc": "0x10460a7a8",
+			"description": "0x10460a7f8",
+			"instances": [
+				"0x13d606b50",
+				"0x13d606930",
+				"0x13d606910",
+				"0x13d6068b0",
+				"0x13d606880"
+			]
+		},
+		{
+			"type": "Class",
+			"new": null,
+			"dealloc": "0x10460a414",
+			"description": "0x10460a424",
+			"instances": [
+				null
+			]
+		}
+	]
+}
 ```
 
 ## Details

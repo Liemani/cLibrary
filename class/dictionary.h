@@ -2,6 +2,7 @@
 #define DICTIONARY_H
 
 #include "kernelClass/class.h"
+#include "class/list.h"
 
 
 
@@ -11,7 +12,7 @@ t_class	*Dictionary;
 
 
 
-void	setDictionary();
+void	setDictionaryClass();
 void	dictionaryUpdate(t_dictionary *dictionary, void *key, void *value);
 
 
