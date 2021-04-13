@@ -1,8 +1,6 @@
 #ifndef CLASS_H
 #define CLASS_H
 
-#include <stdbool.h>
-
 #include "kernelClass/utils.h"
 #include "kernelClass/kernelList.h"
 #include "kernelClass/pointer.h"
@@ -12,9 +10,10 @@
 
 typedef struct		s_class
 {
-	void			*(*new)();
-	void			(*dealloc)(void *instance);
-	t_string		*(*description)(void *instance);
+	t_instance		*(*new)();
+	void			(*dealloc)(t_instance *instance);
+	t_string		*(*description)(t_instance *instance);
+	int				(*equal)(t_instance *lhs, void *rhs);
 	t_kernelList	*instanceList;
 }					t_class;
 
@@ -25,12 +24,14 @@ t_class	*Class;
 
 void		setClassClass();
 
-void		classAddInstance(t_class *class, void *instance);
-void		classRemoveInstance(t_class *class, void *instance);
-bool		classContainsInstance(t_class *class, void *instance);
+void		classAddInstance(t_class *class, t_instance *instance);
+void		classRemoveInstance(t_class *class, t_instance *instance);
+int			classContainsInstance(t_class *class, t_instance *instance);
 
-void		dealloc(void *instance);
-t_string	*description(void *instance);
+t_class		*class(t_instance *instance);
+void		dealloc(t_instance *instance);
+t_string	*description(t_instance *instance);
+int			equal(t_instance *lhs, t_instance *rhs);
 
 
 

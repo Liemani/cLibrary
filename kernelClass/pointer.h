@@ -15,6 +15,7 @@ t_class			*Pointer;
 
 void		deallocPointer(t_pointer *pointer);
 t_string	*descriptionPointer(t_pointer *pointer);
+int			equalPointer(t_pointer *lhs, t_pointer *rhs);
 
 void		setPointerClass();
 

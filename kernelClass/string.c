@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #include "kernelClass/class.h"
 
@@ -64,6 +63,37 @@ static t_string	*descriptionString(t_string *string)
 	return (resultString);
 }
 
+static int		equalString(t_string *lhs, t_instance *rhs)
+{
+	t_class *rhsClass = class(rhs);
+	if (rhsClass == String)
+	{
+		t_string *rhsAsString = (t_string *)rhs;
+		if (lhs->length != rhsAsString->length)
+			return (false);
+
+		if (lhs->value == rhsAsString->value)
+			return (true);
+
+		if (lhs->value == NULL || rhsAsString->value == NULL)
+			return (false);
+
+		return (!strcmp(lhs->value, rhsAsString->value));
+	}
+	else if (rhsClass == Pointer)
+	{
+		if (lhs->value == rhs)
+			return (true);
+
+		if (lhs->value == NULL || rhs == NULL)
+			return (false);
+
+		return (!strcmp(lhs->value, rhs));
+	}
+
+	return (false);
+}
+
 void			setStringClass()
 {
 	if (!Class || classContainsInstance(Class, String))
@@ -73,6 +103,7 @@ void			setStringClass()
 	String->new = (newType)newString;
 	String->dealloc = (deallocType)deallocString;
 	String->description = (descriptionType)descriptionString;
+	String->equal = (equalType)equalString;
 }
 
 void			setString(t_string *string, char *s1)
@@ -136,7 +167,7 @@ static size_t	predictSize(t_string *string)
 	size_t	size;
 	int		indent;
 	char	*ptr;
-	bool	isInQuote;
+	int		isInQuote;
 
 	size = string->length + 1;
 	indent = 0;
@@ -176,7 +207,7 @@ void			stringPrettyFlush(t_string *string)
 	int		indent;
 	char	*des;
 	char	*src;
-	bool	isInQuote;
+	int		isInQuote;
 
 	_lmtAlloc((void **)&stringToPrint, predictSize(string));
 	indent = 0;

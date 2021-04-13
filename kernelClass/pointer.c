@@ -3,7 +3,7 @@
 
 #include "kernelClass/class.h"
 
-#define MAX_HEX_ADDRESS_LEN 32
+#define MAX_HEX_ADDRESS_LEN 16
 #define HEX_DECIMAL "0123456789abcdef"
 
 
@@ -52,13 +52,18 @@ t_string	*descriptionPointer(t_pointer *pointer)
 	return (string);
 }
 
+int			equalPointer(t_pointer *lhs, void *rhs)
+{
+	return (lhs == rhs);
+}
+
 void		setPointerClass()
 {
 	if (!Class || classContainsInstance(Class, Pointer))
 		return ;
 
 	Pointer = Class->new();
-	Pointer->new = NULL;
 	Pointer->dealloc = (deallocType)deallocPointer;
 	Pointer->description = (descriptionType)descriptionPointer;
+	Pointer->equal = (equalType)equalPointer;
 }

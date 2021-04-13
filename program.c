@@ -4,7 +4,27 @@
 
 
 
-#define EXECUTE	test003();
+#define EXECUTE	test005();
+
+void	test005()
+{
+	t_dictionary *dictionary = Dictionary->new();
+
+	dictionaryUpdate(dictionary, initString("hi"), initString("there!"));
+	dictionaryUpdate(dictionary, initString("nice"), initString("to meet you!"));
+
+	stringFlush(description(dictionarySubscript(dictionary, "hi")));
+
+	printf("\n\n");
+
+	stringFlush(description(dictionarySubscript(dictionary, "nice")));
+
+	printf("\n\n");
+
+	stringFlush(description(dictionarySubscript(dictionary, "hello")));
+
+	printf("\n");
+}
 
 void	test004()
 {

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #include "kernelClass/class.h"
 
@@ -89,7 +88,7 @@ void			kernelListRemoveContent(t_kernelList *list, void *content)
 	}
 }
 
-bool			kernelListContainsContent(t_kernelList *list, void *content)
+int				kernelListContainsContent(t_kernelList *list, void *content)
 {
 	if (!list)
 		return (false);

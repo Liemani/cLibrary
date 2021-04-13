@@ -93,7 +93,7 @@ static t_pair	*dictionaryGetPair(t_dictionary *dictionary, void *key)
 
 	while ((dictionary = dictionary->next))
 	{
-		const t_pair	*pair = dictionary->content;
+		const t_pair *pair = dictionary->content;
 		if (pair->key == key)
 			return (dictionary->content);
 	}
@@ -105,7 +105,7 @@ void			dictionaryUpdate(t_dictionary *dictionary, void *key, void *value)
 	if (!dictionary)
 		return ;
 
-	t_pair	*pair = dictionaryGetPair(dictionary, key);
+	t_pair *pair = dictionaryGetPair(dictionary, key);
 	if (pair)
 		pair->value = value;
 	else
@@ -116,4 +116,20 @@ void			dictionaryUpdate(t_dictionary *dictionary, void *key, void *value)
 
 		listAddElement(dictionary, pair);
 	}
+}
+
+void			*dictionarySubscript(t_dictionary *dictionary, void *key)
+{
+	t_dictionary	*element;
+	t_pair			*pair;
+
+	element = dictionary;
+	while ((element = element->next))
+	{
+		pair = element->content;
+		if (equal(pair->key, key))
+			return (pair->value);
+	}
+
+	return (NULL);
 }

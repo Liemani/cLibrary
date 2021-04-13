@@ -18,7 +18,7 @@ static t_template	*newTemplate()
 	return (template);
 }
 
-static void		deallocTemplate(t_template *template)
+static void			deallocTemplate(t_template *template)
 {
 	if (!template)
 		return ;
@@ -30,7 +30,7 @@ static void		deallocTemplate(t_template *template)
 	free(template);
 }
 
-static t_string	*descriptionTemplate(t_template *template)
+static t_string		*descriptionTemplate(t_template *template)
 {
 	t_string	*string;
 
@@ -50,13 +50,22 @@ static t_string	*descriptionTemplate(t_template *template)
 	return (string);
 }
 
-void			setTemplateClass()
+static int			equalTemplate(t_template *lhs, void *rhs)
+{
+	// Modify to fit your equal function.
+	// You can control execution according to rhs's class (kernelClass/string.c/equalString is example)
+	return (lhs == rhs);
+}
+
+void				setTemplateClass()
 {
 	if (!Class || classContainsInstance(Class, Template))
 		return ;
 
 	Template = Class->new();
-	Template->new = (newType)newTemplate;
-	Template->dealloc = (deallocType)deallocTemplate;
-	Template->description = (descriptionType)descriptionTemplate;
+//	Uncomment what you implemented, if left commented, 'Pointer' class function will be used.
+//	Template->new = (newType)newTemplate;
+//	Template->dealloc = (deallocType)deallocTemplate;
+//	Template->description = (descriptionType)descriptionTemplate;
+//	Template->equal =  (equalType)equalTemplate;
 }

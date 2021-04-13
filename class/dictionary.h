@@ -14,6 +14,7 @@ t_class	*Dictionary;
 
 void	setDictionaryClass();
 void	dictionaryUpdate(t_dictionary *dictionary, void *key, void *value);
+void	*dictionarySubscript(t_dictionary *dictionary, void *key);
 
 
 

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
 
 #include "kernelClass/class.h"
 
@@ -11,6 +10,10 @@ static t_class	*newClass()
 	t_class	*class;
 
 	lmtAlloc(class);
+	class->new = NULL;
+	class->dealloc = NULL;
+	class->description = NULL;
+	class->equal = NULL;
 	class->instanceList = newKernelList();
 	classAddInstance(Class, class);
 
@@ -136,7 +139,7 @@ void			setClassClass()
 	setStringClass();
 }
 
-void			classAddInstance(t_class *class, void *instance)
+void			classAddInstance(t_class *class, t_instance *instance)
 {
 	if (!class)
 		return ;
@@ -145,7 +148,7 @@ void			classAddInstance(t_class *class, void *instance)
 		kernelListAddContent(class->instanceList, instance);
 }
 
-void			classRemoveInstance(t_class *class, void *instance)
+void			classRemoveInstance(t_class *class, t_instance *instance)
 {
 	if (!class)
 		return ;
@@ -153,7 +156,7 @@ void			classRemoveInstance(t_class *class, void *instance)
 	kernelListRemoveContent(class->instanceList, instance);
 }
 
-bool			classContainsInstance(t_class *class, void *instance)
+int				classContainsInstance(t_class *class, t_instance *instance)
 {
 	if (!class)
 		return (false);
@@ -161,7 +164,7 @@ bool			classContainsInstance(t_class *class, void *instance)
 	return (kernelListContainsContent(class->instanceList, instance));
 }
 
-static t_class	*_classSubscriptInstance(void *instance)
+t_class			*class(t_instance *instance)
 {
 	t_kernelList	*element;
 
@@ -179,12 +182,29 @@ static t_class	*_classSubscriptInstance(void *instance)
 	return (Pointer);
 }
 
-void			dealloc(void *instance)
+void			dealloc(t_instance *instance)
 {
-	_classSubscriptInstance(instance)->dealloc(instance);
+	const deallocType deallocFunction = class(instance)->dealloc;
+	if (deallocFunction)
+		deallocFunction(instance);
+	else
+		Pointer->dealloc(instance);
 }
 
-t_string		*description(void *instance)
+t_string		*description(t_instance *instance)
 {
-	return (_classSubscriptInstance(instance)->description(instance));
+	const descriptionType descriptionFunction = class(instance)->description;
+	if (descriptionFunction)
+		return (descriptionFunction(instance));
+	else
+		return (Pointer->description(instance));
+}
+
+int				equal(t_instance *lhs, t_instance *rhs)
+{
+	const equalType equalFunction = class(lhs)->equal;
+	if (equalFunction)
+		return (equalFunction(lhs, rhs));
+	else
+		return (Pointer->equal(lhs, rhs));
 }
