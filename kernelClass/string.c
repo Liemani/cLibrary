@@ -65,6 +65,9 @@ static t_string	*descriptionString(t_string *string)
 
 static int		equalString(t_string *lhs, t_instance *rhs)
 {
+	if (lhs == NULL)
+		return (false);
+
 	t_class *rhsClass = class(rhs);
 	if (rhsClass == String)
 	{

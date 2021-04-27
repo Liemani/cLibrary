@@ -46,10 +46,6 @@ You can test the example `program.c` file.
 - `stringFlush(<string>)` will print the value and dealloc string.
 - `stringprettyFlush(<string>)` will print the value pretty and dealloc string.
 
-#### memory management
-
-All classes and instances will be freed when called exit() or return of main.
-
 ## Example
 
 ```c
